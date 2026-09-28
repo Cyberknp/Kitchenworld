@@ -1,16 +1,37 @@
+
 using UnityEngine;
+
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Update()
     {
-        
-    }
+        Vector2 inputVector=new Vector2(0,0);
 
-    // Update is called once per frame
-    void Update()
-    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            inputVector.y = 1;
+        }
+        if(Input.GetKey(KeyCode.S))
+        {
+            inputVector.y = -1;
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            inputVector.x = -1;
+        }
+        if(Input.GetKey(KeyCode.D))
+        {
+            inputVector.x = 1;
+        }
+       // Player movement logic here
+       inputVector=inputVector.normalized;
+        //Adding movement to the player object capsule 
+        //assigning the vector 3 to only two axis from vector 2 to make it 2D movement
+        Vector3 moveDir=new Vector3(inputVector.x,0f,inputVector.y);
         
+        transform.position += moveDir;
+        // Normalize the input vector to ensure consistent movement speed
+       Debug.Log(inputVector);
     }
 }
